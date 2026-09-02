@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/sample_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/start_sound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_sound"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/select_sound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_sound"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_sound"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/file_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/size_word"
+        android:padding="@dimen/top_margin"
+        tools:text="text"
+        app:layout_constraintTop_toBottomOf="@id/select_sound"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+       />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/record"
+        android:layout_marginStart="@dimen/top_margin"
+        app:layout_constraintTop_toBottomOf="@id/file_path"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/luoli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/luoli"
+        android:layout_marginStart="@dimen/top_margin"
+        app:layout_constraintTop_toBottomOf="@id/file_path"
+        app:layout_constraintStart_toEndOf="@id/record"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dashu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dashu"
+        android:layout_marginStart="@dimen/top_margin"
+        app:layout_constraintTop_toBottomOf="@id/file_path"
+        app:layout_constraintStart_toEndOf="@id/luoli"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/jingsong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/jingsong"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginStart="@dimen/top_margin"
+        app:layout_constraintTop_toBottomOf="@id/record"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/gaoguai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/gaoguai"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginStart="@dimen/top_margin"
+        app:layout_constraintTop_toBottomOf="@id/record"
+        app:layout_constraintStart_toEndOf="@id/jingsong"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/kongling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kongling"
+        android:layout_marginTop="@dimen/top_margin"
+        android:layout_marginStart="@dimen/top_margin"
+        app:layout_constraintTop_toBottomOf="@id/record"
+        app:layout_constraintStart_toEndOf="@id/gaoguai"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

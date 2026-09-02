@@ -1,0 +1,67 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+}
+
+android {
+    namespace 'com.liyaan.sound'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.liyaan.sound"
+        minSdk 27
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // TODO 第四步：指定CPU架构 Cmake中的本地库，例如：libnative-lib.so libderryku.so
+        externalNativeBuild {
+            cmake {
+                abiFilters "armeabi-v7a"
+            }
+        }
+
+        // TODO 第五步：指定CPU的架构  apk/lib/平台
+        ndk {
+            abiFilters("armeabi-v7a")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.22.1'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+// TODO 第六步：主要是 有没有提供 java的 jar包
+    implementation files("libs\\fmod.jar")
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+}
