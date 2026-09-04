@@ -2,5 +2,7 @@
     <string name="app_name">sound</string>
     <string name="start_sound">开始录音</string>
     <string name="select_sound">选择音频</string>
+    <string name="word_to_audio">转成语音</string>
+    <string name="edit_hint">请输入要转的文字</string>
 
 </resources>

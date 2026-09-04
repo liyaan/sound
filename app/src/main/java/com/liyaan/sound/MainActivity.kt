@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import android.util.Log
 import android.view.MotionEvent
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private val MODE_GAOGUAI = 4 // 搞怪
     private val MODE_KONGLING = 5 // 空灵
     // 播放的路径
-    private val PATH = "file:///android_asset/123456.mp3"
+    private var PATH = "file:///android_asset/1.mp3"
 
     private var mRecorder: MediaRecorder? = null
     private var isRecording = false
@@ -39,11 +40,10 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        FMOD.init(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        FMOD.init(this)
-        initSystem()
+        PATH = intent.getStringExtra("path")?:"file:///android_asset/1.mp3"
         mFilePath =  "${getExternalFilesDir(null) }/record_audio.mp3"
         // Example of a call to a native method
         binding.sampleText.text = stringFromJNI()
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.startSound.setOnClickListener { clickFox(binding.kongling.id) }
         binding.selectSound.setOnClickListener { clickFox(binding.kongling.id) }
-
+        initSystem()
 //        binding.record.setOnTouchListener{view,event->
 //            when(event?.actionMasked){
 //                MotionEvent.ACTION_DOWN->{
@@ -99,34 +99,22 @@ class MainActivity : AppCompatActivity() {
         stopSound()
         when(id){
             R.id.record -> {
-                Thread{
-                    voiceChangeNative(MODE_NORMAL, PATH)
-                }.start()
+                voiceChangeNative(MODE_NORMAL, PATH)
             }
             R.id.luoli -> {
-                Thread{
-                    voiceChangeNative(MODE_LUOLI, PATH)
-                }.start()
+                voiceChangeNative(MODE_LUOLI, PATH)
             }
             R.id.dashu -> {
-                Thread{
-                    voiceChangeNative(MODE_DASHU, PATH)
-                }.start()
+                voiceChangeNative(MODE_DASHU, PATH)
             }
             R.id.jingsong -> {
-                Thread{
-                    voiceChangeNative(MODE_JINGSONG, PATH)
-                }.start()
+                voiceChangeNative(MODE_JINGSONG, PATH)
             }
             R.id.gaoguai -> {
-                Thread{
-                    voiceChangeNative(MODE_GAOGUAI, PATH)
-                }.start()
+                voiceChangeNative(MODE_GAOGUAI, PATH)
             }
             R.id.kongling -> {
-                Thread{
-                    voiceChangeNative(MODE_KONGLING, PATH)
-                }.start()
+                voiceChangeNative(MODE_KONGLING, PATH)
             }
 
         }
@@ -193,6 +181,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         // Used to load the 'sound' library on application startup.
         init {
+            System.loadLibrary("fmod");
             System.loadLibrary("sound")
         }
     }

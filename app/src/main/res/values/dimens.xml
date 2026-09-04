@@ -3,4 +3,5 @@
     <dimen name="size_word">18sp</dimen>
 
     <dimen name="top_margin">20dip</dimen>
+    <dimen name="margin_5">5dip</dimen>
 </resources>
