@@ -97,6 +97,11 @@ class MainActivity : AppCompatActivity() {
             return
         }
         stopSound()
+        val ptr = nativeCreate()
+        nativeWriteInt(ptr,111)
+        nativeSetDataPosition(ptr,0)
+        val position = nativeReadInt(ptr)
+        Log.i("aaaaaaaaaaaaa","position =  $position")
         when(id){
             R.id.record -> {
                 voiceChangeNative(MODE_NORMAL, PATH)
@@ -125,6 +130,14 @@ class MainActivity : AppCompatActivity() {
     private external fun releaseSystem()
     private external fun stopSound()
     private external fun voiceChangeNative(mode: Int, path: String)
+
+
+
+    //Parcel
+    private external fun nativeCreate(): Long // 在native层构建 Parcel.cpp对象
+    private external fun nativeWriteInt(nativePtr: Long, `val`: Int) // 写入int
+    private external fun nativeSetDataPosition(nativePtr: Long, pos: Int) // 写完后 设置偏移位置
+    private external fun nativeReadInt(nativePtr: Long): Int // 读取int
 
 
 

@@ -287,4 +287,31 @@ Java_com_liyaan_sound_MainActivity_voiceChangeNative(JNIEnv *env, jobject thiz, 
 }
 
 
-
+//Parcel
+#include "DParcel.h"
+extern "C"
+JNIEXPORT jlong JNICALL
+Java_com_liyaan_sound_MainActivity_nativeCreate(JNIEnv *env, jobject thiz) {
+    DParcel *parcel = new DParcel();
+    return reinterpret_cast<jlong>(parcel);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_liyaan_sound_MainActivity_nativeWriteInt(JNIEnv *env, jobject thiz, jlong native_ptr,
+                                                  jint val) {
+    DParcel *parcelWrite = reinterpret_cast<DParcel *>(native_ptr);
+    parcelWrite->writeInt(val);
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_liyaan_sound_MainActivity_nativeSetDataPosition(JNIEnv *env, jobject thiz,
+                                                         jlong native_ptr, jint pos) {
+    DParcel *parcelDP = reinterpret_cast<DParcel *>(native_ptr);
+    parcelDP->setDataPosition(pos);
+}
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_liyaan_sound_MainActivity_nativeReadInt(JNIEnv *env, jobject thiz, jlong native_ptr) {
+    DParcel *parcelRead = reinterpret_cast<DParcel *>(native_ptr);
+    return parcelRead->readInt();
+}
