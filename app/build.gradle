@@ -28,7 +28,9 @@ android {
             abiFilters("armeabi-v7a")
         }
     }
-
+    aaptOptions {
+        noCompress "tflite" // 防止模型文件被压缩，导致加载失败
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -50,6 +52,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        mlModelBinding true
     }
 }
 
@@ -63,5 +66,7 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
+
+    implementation libs.tensorflow.lite // 请使用最新稳定版
 
 }

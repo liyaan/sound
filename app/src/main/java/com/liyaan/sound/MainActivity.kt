@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.liyaan.sound.databinding.ActivityMainBinding
+import com.liyaan.tflite.LoadTflite
 import org.fmod.FMOD
 import java.io.IOException
 
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     private var isRecording = false
     private var mFilePath: String? = null
 
+    private  var classifier: LoadTflite? = null
+
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +59,23 @@ class MainActivity : AppCompatActivity() {
 
         binding.startSound.setOnClickListener { clickFox(binding.kongling.id) }
         binding.selectSound.setOnClickListener { clickFox(binding.kongling.id) }
+        Thread {
+            classifier = LoadTflite(this)
+        }.start()
+        binding.recognizeBtn.setOnClickListener {
+            val bitmap = binding.drawView.getBitmap()
+            classifier?.let {
+                // 执行识别
+                val result = it.recognize(bitmap)
+
+                // 显示结果
+                runOnUiThread {
+                    binding.resultText.text =
+                        "识别结果: ${result.digit}\n置信度: ${"%.2f".format(result.confidence * 100)}%"
+                    binding.drawView.clear()
+                }
+            }
+        }
         initSystem()
 //        binding.record.setOnTouchListener{view,event->
 //            when(event?.actionMasked){
@@ -190,6 +210,7 @@ class MainActivity : AppCompatActivity() {
         }
         releaseSystem()
         FMOD.close(); // 做实验 来验证
+        classifier?.close()
     }
     companion object {
         // Used to load the 'sound' library on application startup.

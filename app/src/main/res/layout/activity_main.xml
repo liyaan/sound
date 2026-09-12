@@ -103,4 +103,31 @@
         app:layout_constraintTop_toBottomOf="@id/record"
         app:layout_constraintStart_toEndOf="@id/gaoguai"/>
 
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/recognizeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_result"
+        app:layout_constraintBottom_toTopOf="@+id/drawView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wait_result"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/recognizeBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <com.liyaan.tflite.DrawView
+        android:id="@+id/drawView"
+        android:layout_width="56dip"
+        android:layout_height="56dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
