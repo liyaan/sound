@@ -57,8 +57,9 @@ android {
 }
 
 dependencies {
-// TODO 第六步：主要是 有没有提供 java的 jar包
-    implementation files("libs\\fmod.jar")
+    implementation project(':loadTFLite')
+    implementation project(':mnist')
+    implementation files("libs/fmod.jar")
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
@@ -67,6 +68,5 @@ dependencies {
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
 
-    implementation libs.tensorflow.lite // 请使用最新稳定版
 
 }

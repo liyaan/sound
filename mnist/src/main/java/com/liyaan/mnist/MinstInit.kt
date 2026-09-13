@@ -1,14 +1,15 @@
-package com.liyaan.tflite
+package com.liyaan.mnist
 
 import android.content.Context
 import android.graphics.Bitmap
+import androidx.core.graphics.get
+import androidx.core.graphics.scale
+import com.liyaan.loadtflite.LoadTFLite
 import org.tensorflow.lite.Interpreter
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import androidx.core.graphics.scale
-import androidx.core.graphics.get
 
-class LoadTflite(private val context: Context) {
+object MinstInit {
     private var interpreter: Interpreter? = null
 
     // 模型输入参数
@@ -23,20 +24,9 @@ class LoadTflite(private val context: Context) {
     private var inputBuffer: ByteBuffer? = null
     private var outputBuffer = arrayOf(FloatArray(NUM_CLASSES))
 
-    init {
+    fun initMins(context: Context) {
         try {
-            // 从 assets 加载模型文件
-            val modelByteBuffer = FileUtil.loadMappedFile(context, "mnist.tflite")
-
-            // 配置解释器选项
-            val options = Interpreter.Options()
-            options.setNumThreads(4) // 设置线程数
-
-            // 【可选】启用 GPU 加速
-            // val gpuDelegate = GpuDelegate()
-            // options.addDelegate(gpuDelegate)
-
-            interpreter = Interpreter(modelByteBuffer, options)
+            interpreter = LoadTFLite.initTFLite("mnist.tflite",context)
 
             // 预分配输入缓冲区：1 * 28 * 28 * 1 * 4字节 (float32)
             inputBuffer = ByteBuffer.allocateDirect(
@@ -132,7 +122,7 @@ class LoadTflite(private val context: Context) {
      * 释放资源
      */
     fun close() {
-        interpreter?.close()
+        LoadTFLite.releaseName("mnist.tflite")
         interpreter = null
     }
 

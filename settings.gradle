@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "sound"
 include ':app'
+include ':loadTFLite'
+include ':mnist'

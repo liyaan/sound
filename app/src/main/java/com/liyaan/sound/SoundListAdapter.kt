@@ -28,7 +28,7 @@ class SoundListAdapter(activity: AppCompatActivity): RecyclerView.Adapter<SoundL
         holder.tvName.setOnClickListener {
             val intent = Intent(_activity,MainActivity::class.java)
             intent.putExtra("path",Utils.dataList().get(position).soundUrl)
-            _activity.startActivity(intent);
+            _activity.startActivity(intent)
         }
     }
 }

@@ -4,4 +4,5 @@
 
     <dimen name="top_margin">20dip</dimen>
     <dimen name="margin_5">5dip</dimen>
+    <dimen name="height_50">50dip</dimen>
 </resources>
